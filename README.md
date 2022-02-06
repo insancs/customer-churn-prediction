@@ -92,17 +92,85 @@ Churn rate adalah rasio pelanggan yang berhenti berlangganan dengan perusahaan d
 | 3 |      50004 |     1 |    0.0 |                Phone |        3 |            15.0 |           Debit Card |   Male |            2.0 |                        4 | Laptop & Accessory |                 5 |        Single |               8 |        0 |                        23.0 |        0.0 |        1.0 |               3.0 |         134.07 |   |
 | 4 |      50005 |     1 |    0.0 |                Phone |        1 |            12.0 |                   CC |   Male |            NaN |                        3 |             Mobile |                 5 |        Single |               3 |        0 |                        11.0 |        1.0 |        1.0 |               3.0 |         129.60 |   |
 
-# Statistics Decriptive
-| CustomerID |        Churn |      Tenure |    CityTier | WarehouseToHome | HourSpendOnApp | NumberOfDeviceRegistered | SatisfactionScore | NumberOfAddress |    Complain | OrderAmountHikeFromlastYear |  CouponUsed |  OrderCount | DaySinceLastOrder | CashbackAmount |             |
-|-----------:|-------------:|------------:|------------:|----------------:|---------------:|-------------------------:|------------------:|----------------:|------------:|----------------------------:|------------:|------------:|------------------:|---------------:|-------------|
-|      count |  5630.000000 | 5630.000000 | 5366.000000 |     5630.000000 |    5379.000000 |              5375.000000 |       5630.000000 |     5630.000000 | 5630.000000 |                 5630.000000 | 5365.000000 | 5374.000000 |       5372.000000 |    5323.000000 | 5630.000000 |
-|       mean | 52815.500000 |    0.168384 |   10.189899 |        1.654707 |      15.639896 |                 2.931535 |          3.688988 |        3.066785 |    4.214032 |                    0.284902 |   15.707922 |    1.751023 |          3.008004 |       4.543491 |  177.223030 |
-|        std |  1625.385339 |    0.374240 |    8.557241 |        0.915389 |       8.531475 |                 0.721926 |          1.023999 |        1.380194 |    2.583586 |                    0.451408 |    3.675485 |    1.894621 |          2.939680 |       3.654433 |   49.207036 |
-|        min | 50001.000000 |    0.000000 |    0.000000 |        1.000000 |       5.000000 |                 0.000000 |          1.000000 |        1.000000 |    1.000000 |                    0.000000 |   11.000000 |    0.000000 |          1.000000 |       0.000000 |    0.000000 |
-|        25% | 51408.250000 |    0.000000 |    2.000000 |        1.000000 |       9.000000 |                 2.000000 |          3.000000 |        2.000000 |    2.000000 |                    0.000000 |   13.000000 |    1.000000 |          1.000000 |       2.000000 |  145.770000 |
-|        50% | 52815.500000 |    0.000000 |    9.000000 |        1.000000 |      14.000000 |                 3.000000 |          4.000000 |        3.000000 |    3.000000 |                    0.000000 |   15.000000 |    1.000000 |          2.000000 |       3.000000 |  163.280000 |
-|        75% | 54222.750000 |    0.000000 |   16.000000 |        3.000000 |      20.000000 |                 3.000000 |          4.000000 |        4.000000 |    6.000000 |                    1.000000 |   18.000000 |    2.000000 |          3.000000 |       7.000000 |  196.392500 |
-|        max | 55630.000000 |    1.000000 |   61.000000 |        3.000000 |     127.000000 |                 5.000000 |          6.000000 |        5.000000 |   22.000000 |                    1.000000 |   26.000000 |   16.000000 |         16.000000 |      46.000000 |  324.990000 |
+# Modelling
+Pada tahap modelling kita akan membandingkan beberapa metode yang nantinya kita akan pilih mana model yang menghasilkan performa terbaik. Model dengan performa terbaik yang nantinya akan kita pilih dalam tahap selanjutnya.
 
-# Data Cleaning
-## 
+|    |                      Model |  fit_time | score_time | test_accuracy | test_precision | test_recall |  test_f1 |
+|---:|---------------------------:|----------:|-----------:|--------------:|---------------:|------------:|---------:|
+|  0 |              XGBClassifier |  2.514655 |   0.025586 |      0.994393 |       0.983622 |    0.983547 | 0.983546 |
+|  1 |       ExtraTreesClassifier |  1.206610 |   0.148457 |      0.993458 |       1.000000 |    0.961635 | 0.980344 |
+|  2 |     RandomForestClassifier |  1.376692 |   0.170867 |      0.989533 |       0.991036 |    0.947337 | 0.968458 |
+|  3 |     DecisionTreeClassifier |  0.086550 |   0.022365 |      0.985607 |       0.951505 |    0.964907 | 0.958101 |
+|  4 |          BaggingClassifier |  0.556066 |   0.027426 |      0.980374 |       0.963785 |    0.919972 | 0.941126 |
+|  5 |              MLPClassifier | 11.257185 |   0.022924 |      0.968224 |       0.936284 |    0.873945 | 0.903460 |
+|  6 |       KNeighborsClassifier |  0.009918 |   0.518106 |      0.922617 |       0.893178 |    0.620621 | 0.732242 |
+|  7 | GradientBoostingClassifier |  2.162448 |   0.020611 |      0.921121 |       0.845352 |    0.658998 | 0.740171 |
+|  8 |                        SVC |  1.362156 |   0.869904 |      0.913832 |       0.890933 |    0.563670 | 0.689508 |
+|  9 |         AdaBoostClassifier |  0.814248 |   0.065768 |      0.896636 |       0.750368 |    0.589996 | 0.659951 |
+| 10 |         LogisticRegression |  0.177303 |   0.019189 |      0.895327 |       0.780061 |    0.538450 | 0.636524 |
+| 11 |                 GaussianNB |  0.025094 |   0.046747 |      0.677383 |       0.319730 |    0.787306 | 0.454544 |
+Dari hasil diatas, XGBClassifier memiliki nilai akurasi dan dan recall yang paling tinggi dari keseluruhan model. Pada kasus ini selain nilai akurasi yang kita perhitungkan, recall juga akan kita perhitungkan karena **kita lebih ingin model kita dapat mengklasifikasi lebih banyak False Positive(FP) daripada False Negative (FN)**. 
+FP pada kasus ini yaitu model memprediksi customer akan mengalami churn, tetapi sebenarnya tidak churn. Maka FP lebih baik daripada FN. FN yaitu model memprediksi customer tidak akan churn tetapi sebenarnya churn, dan hal ini **dapat menyebabkan semakin banyak customer yang tidak bisa kita lakukan penawaran lebih lanjut sehingga mereka churn**.  
+
+> Dari keseluruhan proses diatas, maka saya akan memilih model **XGBoost Classifier** karena memiliki nilai akurasi dan recall yang tertinggi.
+
+## XGBoost
+Pada tahap ini kita akan melakukan perbandingan performa model sebelum dan sesudah dilakukan feature selection.
+|             | train_acc | test_acc | precision | recall | f1-score |
+|------------:|----------:|---------:|----------:|-------:|---------:|
+| without_rfe |     100.0 |    97.66 |     95.09 |  90.12 |    92.54 |
+|    with_rfe |     100.0 |    97.76 |     94.05 |  91.86 |    92.94 |
+Setelah dilakukan feature selection, ternyata didapatkan performa model yang lebih baik dari sebelum melakukan feature selection. Maka kita akan menggunakan feature hasil dari RFE.
+
+Note :
+- without_rfe = All features
+- with_rfe = Feature hasil RFE
+
+## Hyperparameter Tuning
+Lakukan tuning parameter untuk memilih parameter terbaik yang akan digunakan. Metode tuning yang digunakan yaitu Random Search CV. Random Search CV dipilih karena lebih mudah dan murah pada sisi komputasi.
+|               | train_acc | test_acc | precision | recall | f1-score |
+|--------------:|----------:|---------:|----------:|-------:|---------:|
+|       xgb_rfe |    100.00 |    97.76 |     94.05 |  91.86 |    92.94 |
+| xgb_rfe_tuned |     99.49 |    94.30 |     75.34 |  95.93 |    84.40 |
+Setelah dilakukan hyperparameter tuning, ternyata model mengalami penurunan nilai akurasi, precision, dan f1-score, tetapi pada nilai recall mengalami peningkatan sekitar 4%. Karena secara keseluruhan model mengalami penurunan performa, maka kita akan menggunakan default parameter. 
+
+# Model Evaluation 
+## Confusion Matrix
+<p align="left">
+    <img src="images/cm.png" width="350" height="250">
+</p>
+
+## Classification Report
+                      precision    recall  f1-score   support
+
+                 0.0       0.98      0.99      0.99       898
+                 1.0       0.94      0.92      0.93       172
+
+            accuracy                           0.98      1070
+           macro avg       0.96      0.95      0.96      1070
+        weighted avg       0.98      0.98      0.98      1070
+        
+## Precision Recall and ROC Curve
+<p align="left">
+    <img src="images/roc.png" width="350" height="250">
+</p>
+
+## Feature Importance
+<p align="left">
+    <img src="images/feature.png" width="350" height="250">
+</p>
+
+## Thresholds Adjustment
+Lakukan pemilihan thresholds untuk memilih nilai thresholds terbaik dengan menggunakan Discrimination Threshold.
+<p align="left">
+    <img src="images/th.png" width="350" height="250">
+</p>
+Dari hasil discrimination thresholds, didapatkan thresholds paling ideal, yaitu 0.57.  
+Maka setelah didapatkan thresholds yang optimal, maka thresholds tersebut kita gunakan untuk klasifikasi.
+- Jika lebih dari nilai tersebut maka termasuk "Churn (1)"
+- Jika sebaliknya berarti "Not Churn (0)".
+|                      | accuracy | precision | recall | f1-score |
+|---------------------:|---------:|----------:|-------:|---------:|
+|   default thresholds |    97.76 |     94.05 |  91.86 |    92.94 |
+| thresholds adjusment |    97.76 |     94.58 |  91.28 |    92.90 |
+Ternyata setelah dilakukan thresholds adjustment, hasil yang didapatkan mengalami penurunan performa, maka kita tidak akan menggunakan nilai thresholds tersebut. 
