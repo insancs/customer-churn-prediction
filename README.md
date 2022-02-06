@@ -82,8 +82,7 @@ Churn rate adalah rasio pelanggan yang berhenti berlangganan dengan perusahaan d
    - Thresholds Adjustment
 9. Save Model
 
-# Data Explopration
-## Dataset Preview
+# Dataset Preview
 |   | CustomerID | Churn | Tenure | PreferredLoginDevice | CityTier | WarehouseToHome | PreferredPaymentMode | Gender | HourSpendOnApp | NumberOfDeviceRegistered |   PreferedOrderCat | SatisfactionScore | MaritalStatus | NumberOfAddress | Complain | OrderAmountHikeFromlastYear | CouponUsed | OrderCount | DaySinceLastOrder | CashbackAmount |   |
 |--:|-----------:|------:|-------:|---------------------:|---------:|----------------:|---------------------:|-------:|---------------:|-------------------------:|-------------------:|------------------:|--------------:|----------------:|---------:|----------------------------:|-----------:|-----------:|------------------:|---------------:|---|
 | 0 |      50001 |     1 |    4.0 |         Mobile Phone |        3 |             6.0 |           Debit Card | Female |            3.0 |                        3 | Laptop & Accessory |                 2 |        Single |               9 |        1 |                        11.0 |        1.0 |        1.0 |               5.0 |         159.93 |   |
@@ -109,6 +108,7 @@ Pada tahap modelling kita akan membandingkan beberapa metode yang nantinya kita 
 |  9 |         AdaBoostClassifier |  0.814248 |   0.065768 |      0.896636 |       0.750368 |    0.589996 | 0.659951 |
 | 10 |         LogisticRegression |  0.177303 |   0.019189 |      0.895327 |       0.780061 |    0.538450 | 0.636524 |
 | 11 |                 GaussianNB |  0.025094 |   0.046747 |      0.677383 |       0.319730 |    0.787306 | 0.454544 |
+
 Dari hasil diatas, XGBClassifier memiliki nilai akurasi dan dan recall yang paling tinggi dari keseluruhan model. Pada kasus ini selain nilai akurasi yang kita perhitungkan, recall juga akan kita perhitungkan karena **kita lebih ingin model kita dapat mengklasifikasi lebih banyak False Positive(FP) daripada False Negative (FN)**. 
 FP pada kasus ini yaitu model memprediksi customer akan mengalami churn, tetapi sebenarnya tidak churn. Maka FP lebih baik daripada FN. FN yaitu model memprediksi customer tidak akan churn tetapi sebenarnya churn, dan hal ini **dapat menyebabkan semakin banyak customer yang tidak bisa kita lakukan penawaran lebih lanjut sehingga mereka churn**.  
 
@@ -120,6 +120,7 @@ Pada tahap ini kita akan melakukan perbandingan performa model sebelum dan sesud
 |------------:|----------:|---------:|----------:|-------:|---------:|
 | without_rfe |     100.0 |    97.66 |     95.09 |  90.12 |    92.54 |
 |    with_rfe |     100.0 |    97.76 |     94.05 |  91.86 |    92.94 |
+
 Setelah dilakukan feature selection, ternyata didapatkan performa model yang lebih baik dari sebelum melakukan feature selection. Maka kita akan menggunakan feature hasil dari RFE.
 
 Note :
@@ -132,6 +133,7 @@ Lakukan tuning parameter untuk memilih parameter terbaik yang akan digunakan. Me
 |--------------:|----------:|---------:|----------:|-------:|---------:|
 |       xgb_rfe |    100.00 |    97.76 |     94.05 |  91.86 |    92.94 |
 | xgb_rfe_tuned |     99.49 |    94.30 |     75.34 |  95.93 |    84.40 |
+
 Setelah dilakukan hyperparameter tuning, ternyata model mengalami penurunan nilai akurasi, precision, dan f1-score, tetapi pada nilai recall mengalami peningkatan sekitar 4%. Karena secara keseluruhan model mengalami penurunan performa, maka kita akan menggunakan default parameter. 
 
 # Model Evaluation 
@@ -169,8 +171,10 @@ Dari hasil discrimination thresholds, didapatkan thresholds paling ideal, yaitu 
 Maka setelah didapatkan thresholds yang optimal, maka thresholds tersebut kita gunakan untuk klasifikasi.
 - Jika lebih dari nilai tersebut maka termasuk "Churn (1)"
 - Jika sebaliknya berarti "Not Churn (0)".
+
 |                      | accuracy | precision | recall | f1-score |
 |---------------------:|---------:|----------:|-------:|---------:|
 |   default thresholds |    97.76 |     94.05 |  91.86 |    92.94 |
 | thresholds adjusment |    97.76 |     94.58 |  91.28 |    92.90 |
+
 Ternyata setelah dilakukan thresholds adjustment, hasil yang didapatkan mengalami penurunan performa, maka kita tidak akan menggunakan nilai thresholds tersebut. 
