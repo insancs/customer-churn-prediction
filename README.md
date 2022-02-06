@@ -154,12 +154,12 @@ Setelah dilakukan hyperparameter tuning, ternyata model mengalami penurunan nila
         
 ## Precision Recall and ROC Curve
 <p align="left">
-    <img src="images/roc.png" width="550" height="400">
+    <img src="images/roc.png" width="700" height="400">
 </p>
 
 ## Feature Importance
 <p align="left">
-    <img src="images/feature.png" width="550" height="450">
+    <img src="images/feature.png" width="700" height="450">
 </p>
 
 ## Thresholds Adjustment
