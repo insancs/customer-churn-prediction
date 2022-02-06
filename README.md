@@ -135,6 +135,9 @@ Lakukan tuning parameter untuk memilih parameter terbaik yang akan digunakan. Me
 | xgb_rfe_tuned |     99.49 |    94.30 |     75.34 |  95.93 |    84.40 |
 
 Setelah dilakukan hyperparameter tuning, ternyata model mengalami penurunan nilai akurasi, precision, dan f1-score, tetapi pada nilai recall mengalami peningkatan sekitar 4%. Karena secara keseluruhan model mengalami penurunan performa, maka kita akan menggunakan default parameter. 
+Note :
+- xgb_rfe = Default Parameter
+- xgb_rfe_tuned = Parameter Tuning
 
 # Model Evaluation 
 ## Confusion Matrix
