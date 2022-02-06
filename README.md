@@ -139,7 +139,7 @@ Setelah dilakukan hyperparameter tuning, ternyata model mengalami penurunan nila
 # Model Evaluation 
 ## Confusion Matrix
 <p align="left">
-    <img src="images/cm.png" width="350" height="250">
+    <img src="images/cm.png" width="450" height="350">
 </p>
 
 ## Classification Report
@@ -154,22 +154,22 @@ Setelah dilakukan hyperparameter tuning, ternyata model mengalami penurunan nila
         
 ## Precision Recall and ROC Curve
 <p align="left">
-    <img src="images/roc.png" width="350" height="250">
+    <img src="images/roc.png" width="550" height="400">
 </p>
 
 ## Feature Importance
 <p align="left">
-    <img src="images/feature.png" width="350" height="250">
+    <img src="images/feature.png" width="550" height="450">
 </p>
 
 ## Thresholds Adjustment
 Lakukan pemilihan thresholds untuk memilih nilai thresholds terbaik dengan menggunakan Discrimination Threshold.
 <p align="left">
-    <img src="images/th.png" width="350" height="250">
+    <img src="images/th.png" width="550" height="450">
 </p>
 Dari hasil discrimination thresholds, didapatkan thresholds paling ideal, yaitu 0.57.  
-Maka setelah didapatkan thresholds yang optimal, maka thresholds tersebut kita gunakan untuk klasifikasi.
-- Jika lebih dari nilai tersebut maka termasuk "Churn (1)"
+Maka setelah didapatkan thresholds yang optimal, maka thresholds tersebut kita gunakan untuk klasifikasi. <br>
+- Jika lebih dari nilai tersebut maka termasuk "Churn (1)" <br>
 - Jika sebaliknya berarti "Not Churn (0)".
 
 |                      | accuracy | precision | recall | f1-score |
